@@ -20,7 +20,6 @@ resource "aws_key_pair" "jenkins-key" {
 resource "aws_instance" "example_server" {
   ami           = "ami-0497a974f8d5dcef8"
   instance_type = "t2.micro"
-  security_groups = 
   tags = {
     Name = "webserver"
   }
