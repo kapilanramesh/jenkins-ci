@@ -122,7 +122,8 @@ you should be prompted to the login page
 
 ### initial admin password
 It is stored in a file. Enter the following command in shell then copy and paste it in the page
-![[Pasted image 20240821174345.png]]
+![Pasted image 20240821174345](https://github.com/user-attachments/assets/48fe258b-d63c-45bd-96d4-d40bd46dcaec)
+
 
 ```
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
@@ -132,11 +133,14 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ### select install custom plugins
 choose the following plugins shown
 
-![[Pasted image 20240821174559.png]]
+![Pasted image 20240821174559](https://github.com/user-attachments/assets/5240e8aa-81b3-45a8-ae5d-0b7f346212a8)
+
+
 
 ### create jenkins admin user
 
-![[Pasted image 20240821174921.png]]
+![Pasted image 20240821174921](https://github.com/user-attachments/assets/a7ae3ad0-2752-42b2-b717-67a3395176cc)
+
 
 ### fork/clone this to your github account
 
@@ -154,14 +158,18 @@ cat /var/lib/jenkins/.ssh/id_rsa.pub
 ### add it to main.tf file in repo 
 
 replace this with your copied public_key
-![[Pasted image 20240821222133.png]]
+![Pasted image 20240821222133](https://github.com/user-attachments/assets/9ad79d37-6885-4a95-87e3-8d381e37e37f)
+
 ## create a jenkins job1
 #### click on the +New Item
-![[Pasted image 20240821174951.png]]
+
+![Pasted image 20240821174951](https://github.com/user-attachments/assets/f5a4e03d-1f40-40fe-82d7-4610e2791731)
+
 
 #### select free-style project
 - Enter the name as **terraform_plan**
-![[Pasted image 20240821181219.png]]
+![Pasted image 20240821181219](https://github.com/user-attachments/assets/8eaffb6d-e821-4735-a929-d741d518e20b)
+
 
 
 ### Add description and github project url
@@ -170,11 +178,14 @@ replace this with your copied public_key
 ```
  use your github account url 
 ```
-![[Pasted image 20240821175240.png]]
+![Pasted image 20240821175240](https://github.com/user-attachments/assets/77206b8f-f662-4c46-8c1e-79fb87a404c8)
 
-![[Pasted image 20240821175259.png]]
 
-![[Pasted image 20240821183227.png]]
+![Pasted image 20240821175259](https://github.com/user-attachments/assets/fc709867-111c-4778-be6a-1a95c67ac18b)
+
+
+![Pasted image 20240821183227](https://github.com/user-attachments/assets/c0446974-5771-4a53-8639-84a52df15f00)
+
 
 ```
 terraform init
@@ -213,15 +224,18 @@ cat /var/lib/jenkins/.ssh/id_rsa
 
 ### Add privatekey as a secret in jenkins
 
-![[Pasted image 20240821213429.png]]
+![Pasted image 20240821213429](https://github.com/user-attachments/assets/b6851414-dcea-4c19-a58b-b2536880f837)
+
 
 
 
 ### create a new job named ansible run
-![[Pasted image 20240821222504.png]]
+![Pasted image 20240821222504](https://github.com/user-attachments/assets/147b70ff-e57b-4f1b-a7f6-db3130a69a59)
+
 
 give a variable name as jenkinskey to the added secret
-![[Pasted image 20240821222547.png]]
+![Pasted image 20240821222547](https://github.com/user-attachments/assets/7e2c4d36-b929-46f7-af86-89e77687bd1c)
+
 
 
 Update the execute shell path with following commands
@@ -233,7 +247,8 @@ terraform output -state=/var/lib/jenkins/tfstate-manager/proj1.tf -raw ec2_ip >>
 ansible-playbook -i inventory -u ubuntu --private-key $jenkinskey main.yml
 ```
 
-![[Pasted image 20240821222723.png]]
+![Pasted image 20240821222723](https://github.com/user-attachments/assets/2c4a47a1-1024-4c80-b0e9-890197855f87)
+
 
 
 
@@ -268,6 +283,6 @@ So as a final outcome of this project you should have 4 jenkins jobs created
 - terraform destroy
 - ansible run
 
-These industry-standard workflows are integral to this project. A solid understanding of these concepts will enable you to confidently identify yourself as a junior DevOps engineer
+These industry-standard workflows are integral to this project. A solid understanding of these concepts will enable you to confidently identify yourself as a junior DevOps engineer(Linux, aws, terraform, ansible,  webserver and network configuration )
 
 
