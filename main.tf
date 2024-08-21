@@ -25,3 +25,7 @@ resource "aws_instance" "example_server" {
     Name = "webserver"
   }
 }
+
+output "ec2_ip" {
+  value = "${aws_instance.example_server.public_ip}"
+}
