@@ -10,11 +10,7 @@
         name: nginx
         state: latest
 
-      notify:
-        - restart nginx
-
-  handlers:
     - name: restart nginx
       service: 
          name: nginx 
-         state: reloaded
+         state: started
