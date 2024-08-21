@@ -18,7 +18,7 @@ resource "aws_key_pair" "jenkins-key" {
 }
 
 resource "aws_instance" "example_server" {
-  ami           = "ami-0497a974f8d5dcef8"
+  ami           = "ami-0c2af51e265bd5e0e"
   instance_type = "t2.micro"
   key_name = aws_key_pair.jenkins-key.key_name
   tags = {
