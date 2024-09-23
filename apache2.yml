@@ -15,12 +15,12 @@
         name: apache2 
         state: started
 
-     - name: Check apache2 configuration
+    - name: Check apache2 configuration
    command: apachectl configtest
    ignore_errors: yes
 
- - name: restart apache2
-   service: 
-     name: apache2 
-     state: restarted
-     enabled: yes
+   - name: restart apache2
+     service: 
+       name: apache2 
+       state: restarted
+       enabled: yes
