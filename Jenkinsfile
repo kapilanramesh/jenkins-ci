@@ -21,7 +21,7 @@ pipeline {
 					 export ANSIBLE_HOST_KEY_CHECKING=False
 					 echo "[all]" >inventory
 					terraform output -state=/var/lib/jenkins/tfstate-manager/proj1.tf -raw ec2_ip >> inventory
-					ansible-playbook -i inventory -u ubuntu --private-key $jenkinskey /var/lib/jenkins/workspace/webserver-setup/main.yml
+					ansible-playbook -i inventory -u ubuntu --private-key /var/lib/jenkins/workspace/webserver-setup/jenkins-key.pem /var/lib/jenkins/workspace/webserver-setup/main.yml
 
 
 }
