@@ -22,7 +22,7 @@ resource "aws_instance" "example_server" {
   instance_type = "t2.micro"
   key_name = aws_key_pair.jenkins-key.key_name
   tags = {
-    Name = "webserver"
+    Name = "webserver1"
   }
 }
 
