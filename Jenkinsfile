@@ -15,7 +15,7 @@ pipeline {
         }
         stage('configure') {
             steps {
-               sleep time: 1, unit: 'MINUTES'
+               sleep time: 3, unit: 'MINUTES'
         withCredentials([sshUserPrivateKey(credentialsId: 'ansiblekey', keyFileVariable: 'ansiblekey')]) {
     sh '''export PATH=$PATH:/var/lib/jenkins/.local/bin
 					 export ANSIBLE_HOST_KEY_CHECKING=False
