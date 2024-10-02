@@ -16,12 +16,12 @@ pipeline {
         stage('configure') {
             steps {
                sleep time: 1, unit: 'MINUTES'
-        withCredentials([sshUserPrivateKey(credentialsId: 'jenkinskey', keyFileVariable: 'jenkinskey')]) {
+        withCredentials([sshUserPrivateKey(credentialsId: 'ansiblekey', keyFileVariable: 'ansiblekey')]) {
     sh '''export PATH=$PATH:/var/lib/jenkins/.local/bin
 					 export ANSIBLE_HOST_KEY_CHECKING=False
 					 echo "[all]" >inventory
 					terraform output -state=/var/lib/jenkins/tfstate-manager/proj1.tf -raw ec2_ip >> inventory
-					ansible-playbook -i inventory -u ubuntu --private-key $jenkinskey main.yml'''
+					ansible-playbook -i inventory -u ubuntu --private-key $ansiblekey main.yml'''
 
 
 }
