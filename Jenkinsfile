@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('plan') {
             steps {
-                checkout changelog: false, poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Sedhupathy-devops/jenkins-ci']])
+                checkout changelog: false, poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/kapilanramesh/jenkins-ci']])
                 sh '''terraform init
 	terraform plan -state=/var/lib/jenkins/tfstate-manager/proj1.tf'''
             }
