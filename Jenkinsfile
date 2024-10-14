@@ -21,7 +21,7 @@ pipeline {
 					 export ANSIBLE_HOST_KEY_CHECKING=False
 					 echo "[all]" >inventory
 					terraform output -state=/var/lib/jenkins/tfstate-manager/proj1.tf -raw ec2_ip >> inventory
-					ansible-playbook -i inventory -u ubuntu --private-key $ansiblekey main.yml'''
+					ansible-playbook -i inventory -u ubuntu --private-key $ansiblekey apache2.yml'''
 
 
 }
