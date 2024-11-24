@@ -16,7 +16,7 @@ pipeline {
         stage('configure') {
             steps {
                sleep time: 3, unit: 'MINUTES'
-        withCredentials([sshUserPrivateKey(credentialsId: 'apachekey', keyFileVariable: 'apachekey')]) {
+        withCredentials([sshUserPrivateKey(credentialsId: 'jenkins_id', keyFileVariable: 'apachekey')]) {
     sh '''export PATH=$PATH:/var/lib/jenkins/.local/bin
 					 export ANSIBLE_HOST_KEY_CHECKING=False
 					 echo "[all]" >inventory
