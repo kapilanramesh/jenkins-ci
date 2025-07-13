@@ -1,16 +1,25 @@
-- hosts: all
+---
+- name: Install and configure NGINX with index.html
+  hosts: all
   become: yes
   tasks:
-    - name: update
-      apt: 
+
+    - name: Install NGINX
+      apt:
+        name: nginx
+        state: present
         update_cache: yes
 
-    - name: Install Nginx
-      apt: 
+    - name: Start and enable NGINX
+      service:
         name: nginx
-        state: latest
+        state: started
+        enabled: yes
 
-    - name: restart nginx
-      service: 
-         name: nginx 
-         state: started
+    - name: Copy index.html to NGINX web root
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
