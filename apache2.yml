@@ -1,17 +1,24 @@
-- hosts: all
+---
+- name: Configure Apache and deploy index.html
+  hosts: all
   become: yes
   tasks:
-    - name: update
-      apt: 
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
         update_cache: yes
 
-    - name: Install apache2
-      apt: 
+    - name: Start and enable Apache
+      service:
         name: apache2
-        state: latest
-
-    - name: restart apache2
-      service: 
-        name: apache2
-        state: restarted
+        state: started
         enabled: yes
+
+    - name: Copy index.html to Apache web root
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
