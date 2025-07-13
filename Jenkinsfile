@@ -35,7 +35,7 @@ pipeline {
                         terraform output -state=/var/lib/jenkins/tfstate-manager/proj1.tf -raw ec2_ip >> inventory
 
                         # Run NGINX Ansible playbook
-                        ansible-playbook -i inventory -u ubuntu --private-key $nginxkey nginx.yml
+                        ansible-playbook -i inventory -u ubuntu --private-key $nginxkey main.yml
                     '''
                 }
             }
