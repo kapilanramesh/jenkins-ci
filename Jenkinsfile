@@ -3,30 +3,41 @@ pipeline {
     stages {
         stage('plan') {
             steps {
-                checkout changelog: false, poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/kapilanramesh/jenkins-ci']])
-                sh '''terraform init
-	terraform plan -state=/var/lib/jenkins/tfstate-manager/proj1.tf'''
+                // Clone your GitHub repo
+                checkout changelog: false, poll: false, scm: scmGit(
+                    branches: [[name: '*/main']],
+                    extensions: [],
+                    userRemoteConfigs: [[url: 'https://github.com/kapilanramesh/jenkins-ci']]
+                )
+                sh '''
+                    terraform init
+                    terraform plan -state=/var/lib/jenkins/tfstate-manager/proj1.tf
+                '''
             }
         }
         stage('apply') {
             steps {
-                sh '''terraform apply -state=/var/lib/jenkins/tfstate-manager/proj1.tf -auto-approve'''
+                sh '''
+                    terraform apply -state=/var/lib/jenkins/tfstate-manager/proj1.tf -auto-approve
+                '''
             }
         }
         stage('configure') {
             steps {
-               sleep time: 3, unit: 'MINUTES'
-        withCredentials([sshUserPrivateKey(credentialsId: 'jenkins_id', keyFileVariable: 'apachekey')]) {
-    sh '''export PATH=$PATH:/var/lib/jenkins/.local/bin
-					 export ANSIBLE_HOST_KEY_CHECKING=False
-					 echo "[all]" >inventory
-					terraform output -state=/var/lib/jenkins/tfstate-manager/proj1.tf -raw ec2_ip >> inventory
-					ansible-playbook -i inventory -u ubuntu --private-key $apachekey apache2.yml'''
+                sleep time: 3, unit: 'MINUTES'
+                withCredentials([sshUserPrivateKey(credentialsId: 'jenkins_id', keyFileVariable: 'nginxkey')]) {
+                    sh '''
+                        export PATH=$PATH:/var/lib/jenkins/.local/bin
+                        export ANSIBLE_HOST_KEY_CHECKING=False
 
+                        # Generate inventory from Terraform output
+                        echo "[all]" > inventory
+                        terraform output -state=/var/lib/jenkins/tfstate-manager/proj1.tf -raw ec2_ip >> inventory
 
-}
-               
-                
+                        # Run NGINX Ansible playbook
+                        ansible-playbook -i inventory -u ubuntu --private-key $nginxkey nginx.yml
+                    '''
+                }
             }
         }
     }
